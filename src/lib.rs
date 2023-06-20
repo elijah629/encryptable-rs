@@ -1,10 +1,16 @@
 use base64::{engine::general_purpose, Engine};
+#[cfg(feature = "bincode")]
+use bincode::{Decode, Encode};
 use fernet::Fernet;
 use pbkdf2::pbkdf2_hmac;
 use rand::{thread_rng, Rng};
+#[cfg(feature = "serde")]
+use serde::{Deserialize, Serialize};
 use sha2::Sha512;
 
 /// Represents the encrypted form of some bytes. Contains the salt and the data.
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "bincode", derive(Encode, Decode))]
 pub struct Encrypted {
     salt: [u8; 16],
     data: String,

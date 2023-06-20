@@ -1,6 +1,6 @@
 [package]
 name = "encryptable"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["elijah629"]
 license = "MIT"
@@ -12,7 +12,13 @@ keywords = ["encryption", "encrypt", "decrypt"]
 
 [dependencies]
 base64 = "0.21.2"
+bincode = { version="2.0.0-rc.3", optional=true }
 fernet = "0.2.1"
 pbkdf2 = "0.12.1"
 rand = "0.8.5"
+serde = { version = "1.0.164", optional = true, features = ["derive"] }
 sha2 = "0.10.7"
+
+[features]
+serde = ["dep:serde"]
+bincode = ["dep:bincode"]
